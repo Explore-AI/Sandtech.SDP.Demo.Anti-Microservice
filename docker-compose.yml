@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  # ANTI-PATTERN: No service redundancy or scaling
+  app:
+    build: .
+    # ANTI-PATTERN: Exposing service directly to host without reverse proxy
+    ports:
+      - "5000:5000"
+    # ANTI-PATTERN: No resource limits
+    # ANTI-PATTERN: No restart policy
+    # ANTI-PATTERN: No health checks
+    volumes:
+      # ANTI-PATTERN: Mounting the entire application directory
+      # ANTI-PATTERN: Using a named volume for a database without proper backup strategy
+      - ./:/app
+      - customer_db:/app
+
+# ANTI-PATTERN: Using local volumes instead of managed storage solutions
+volumes:
+  customer_db: 
